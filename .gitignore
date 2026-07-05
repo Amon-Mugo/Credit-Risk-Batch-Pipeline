@@ -1,0 +1,22 @@
+# Python virtual environment
+venv/
+__pycache__/
+*.pyc
+
+# Raw dataset (374MB — lives in GCS, never in git)
+data/raw/*.csv.gz
+data/raw/*.csv
+
+# Terraform local state and cache
+terraform/.terraform/
+terraform/terraform.tfstate
+terraform/terraform.tfstate.backup
+terraform/*.tfplan
+
+# Credentials / ADC
+*.json
+!package.json
+
+# OS / editor cruft
+.DS_Store
+.vscode/
