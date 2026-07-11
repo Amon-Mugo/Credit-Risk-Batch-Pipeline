@@ -1,4 +1,3 @@
-
 from pyspark.sql import DataFrame
 from pyspark.sql import functions as F
 from pyspark.sql.types import DateType
@@ -18,15 +17,15 @@ DATE_FORMAT = "MMM-yyyy"
 VALID_DATE_PATTERN = r"^[A-Za-z]{3}-\d{4}$"
 
 
-def clean_dates(df: DataFrame) -> DataFrame:
-  
-    missing_columns = [col for col in DATE_COLUMNS if col not in df.columns]
+def clean_dates(df: DataFrame, columns: tuple = DATE_COLUMNS) -> DataFrame:
+
+    missing_columns = [col for col in columns if col not in df.columns]
     if missing_columns:
         raise ValueError(
             f"clean_dates: missing expected column(s): {missing_columns}"
         )
 
-    for column in DATE_COLUMNS:
+    for column in columns:
         trimmed = F.trim(F.col(column))
         df = df.withColumn(
             column,
