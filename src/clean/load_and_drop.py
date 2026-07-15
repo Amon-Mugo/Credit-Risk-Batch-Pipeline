@@ -13,9 +13,9 @@ def get_spark_session(app_name: str = "credit_risk_cleaning") -> SparkSession:
     """Create or retrieve a local SparkSession configured for GCS access via ADC."""
     return (
         SparkSession.builder
-        .appName(app_name)
-        .master("local[*]")
-        .config("spark.jars", GCS_CONNECTOR_JAR)
+        .appName(app_name) #specifies the ui header
+        .master("local[*]") #tell spark to run locally
+        .config("spark.jars", GCS_CONNECTOR_JAR) #specify the gcs connector jar
         .config("spark.hadoop.fs.gs.impl", "com.google.cloud.hadoop.fs.gcs.GoogleHadoopFileSystem")
         .config("spark.hadoop.fs.AbstractFileSystem.gs.impl", "com.google.cloud.hadoop.fs.gcs.GoogleHadoopFS")
         .config("spark.hadoop.fs.gs.auth.type", "APPLICATION_DEFAULT")
