@@ -29,7 +29,7 @@ def test_label_target_maps_charged_off_to_1(spark):
     result = label_target(df)
     row = result.collect()[0]
 
-    assert row["target"] == 1
+    assert row["is_default"] == 1
 
 
 def test_label_target_maps_fully_paid_to_0(spark):
@@ -38,7 +38,7 @@ def test_label_target_maps_fully_paid_to_0(spark):
     result = label_target(df)
     row = result.collect()[0]
 
-    assert row["target"] == 0
+    assert row["is_default"] == 0
 
 
 def test_label_target_excludes_in_progress_statuses(spark):

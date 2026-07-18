@@ -15,7 +15,7 @@ def label_target(df: DataFrame) -> DataFrame:
     return (
         df.filter(F.col("loan_status").isin(*RESOLVED_STATUSES))
         .withColumn(
-            "target",
+            "is_default",
             F.when(F.col("loan_status") == "Charged Off", 1).otherwise(0),
         )
     )
