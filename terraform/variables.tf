@@ -9,3 +9,7 @@ variable "region" {
     type        = string
     default     = "us-central1"
 } 
+variable "batch_run_id" {
+  description = "Unique suffix for the Dataproc batch_id, to avoid collisions with prior failed/succeeded runs. Pass explicitly at apply time."
+  type        = string
+}
