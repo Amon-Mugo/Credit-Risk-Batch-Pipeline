@@ -20,3 +20,7 @@ terraform/*.tfplan
 # OS / editor cruft
 .DS_Store
 .vscode/
+
+# PySpark package build artifact for Dataproc Serverless --py-files
+# (regenerated from src/ before each terraform apply, never source)
+src.zip
