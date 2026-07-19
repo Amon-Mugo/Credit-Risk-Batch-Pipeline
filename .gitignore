@@ -24,3 +24,8 @@ terraform/*.tfplan
 # PySpark package build artifact for Dataproc Serverless --py-files
 # (regenerated from src/ before each terraform apply, never source)
 src.zip
+
+# Airflow runtime-generated directories (task logs, custom plugins)
+# — not source, regenerated on every docker compose up
+airflow/logs/
+airflow/plugins/
