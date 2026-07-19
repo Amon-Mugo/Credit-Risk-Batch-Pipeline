@@ -54,6 +54,14 @@ def main() -> None:
     df=add_loan_age(df)
     df=add_dti_bucket(df)
     df=add_delinquency_flag(df)
+
+    # --- Checkpoint: persist labeled/feature-engineered dataset before aggregation ---
+    # Written so the data quality report can read a stable snapshot independently,
+    # without rerunning the full load->clean->feature-engineer chain.
+    # Overwrite mode is intentional: only one checkpoint is kept at a time; history
+    # lives in the baseline snapshot JSON, not in the checkpoint itself.
+    CHECKPOINT_PATH = "gs://credit-risk-batch-pipeline/checkpoints/labeled_dataset/"
+    df.write.mode("overwrite").parquet(CHECKPOINT_PATH)
     
     #load and compute aggregations
     npl_ratio_df= reduce( # reduce is a python builtin function that takes a function and an iterable and applies the function to each element of the iterable
