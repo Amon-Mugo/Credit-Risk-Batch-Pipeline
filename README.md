@@ -13,6 +13,7 @@ The pipeline processes the full Lending Club historical dataset (~2.26M loan rec
 
 **Tech stack:** GCS, PySpark, Dataproc Serverless, BigQuery, Looker Studio, Airflow, Terraform, Docker
 
+![imagealt](https://github.com/Amon-Mugo/Credit-Risk-Batch-Pipeline/blob/38d6ae07dffb9d28d0355c3c5588c3200b38699d/dashboard-1.png)
 
 ## Architecture
 
