@@ -29,3 +29,4 @@ src.zip
 # — not source, regenerated on every docker compose up
 airflow/logs/
 airflow/plugins/
+lookerstudiopdf/
