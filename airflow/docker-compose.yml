@@ -1,4 +1,3 @@
-
 x-airflow-common: &airflow-common
   build:
     context: .
@@ -12,6 +11,13 @@ x-airflow-common: &airflow-common
     GOOGLE_APPLICATION_CREDENTIALS: /opt/airflow/gcp/adc.json
     CLOUDSDK_AUTH_CREDENTIAL_FILE_OVERRIDE: /opt/airflow/gcp/adc.json
     GOOGLE_CLOUD_PROJECT: gcp-de-learning-498109
+    AIRFLOW__SMTP__SMTP_HOST: smtp.gmail.com
+    AIRFLOW__SMTP__SMTP_PORT: 587
+    AIRFLOW__SMTP__SMTP_STARTTLS: "true"
+    AIRFLOW__SMTP__SMTP_SSL: "false"
+    AIRFLOW__SMTP__SMTP_USER: ${SMTP_USER}
+    AIRFLOW__SMTP__SMTP_PASSWORD: ${SMTP_PASSWORD}
+    AIRFLOW__SMTP__SMTP_MAIL_FROM: ${SMTP_USER}
   volumes:
     - ./dags:/opt/airflow/dags
     - ./logs:/opt/airflow/logs

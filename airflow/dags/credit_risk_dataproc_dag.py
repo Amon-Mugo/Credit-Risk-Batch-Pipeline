@@ -8,11 +8,13 @@
 # being hardcoded here, so the DAG stays portable across environments.
 
 import json
+import logging
 from datetime import datetime
 
 from airflow import DAG
 from airflow.models import Variable
 from airflow.operators.bash import BashOperator
+from airflow.utils.email import send_email
 
 CONFIG = Variable.get("credit_risk_dataproc_config", deserialize_json=True)
 
@@ -24,9 +26,43 @@ BATCH_ID_EXPR = (
     "{{ ts_nodash | lower }}"
 )
 
+
+def notify_failure(context):
+    """
+    Sends a failure alert email via SMTP, invoked directly as an
+    on_failure_callback rather than relying on default_args' built-in
+    email_on_failure — which was found to silently no-op in this Airflow
+    2.10.5 setup despite valid SMTP config. Explicit logging on entry and
+    a try/except around the send confirm invocation and surface any SMTP
+    exception directly in the task log, rather than failing silently.
+    """
+    logger = logging.getLogger("airflow.task")
+    logger.info("notify_failure callback invoked")
+
+    task_instance = context["task_instance"]
+    exception = context.get("exception")
+
+    try:
+        send_email(
+            to=["amonkariuki325@gmail.com"],
+            subject=f"Airflow task failed: {task_instance.dag_id}.{task_instance.task_id}",
+            html_content=f"""
+            <p>Task <b>{task_instance.task_id}</b> in DAG <b>{task_instance.dag_id}</b> failed.</p>
+            <p>Run ID: {context['run_id']}</p>
+            <p>Execution date: {context['logical_date']}</p>
+            <p>Exception: {exception}</p>
+            <p>Log URL: {task_instance.log_url}</p>
+            """,
+        )
+        logger.info("notify_failure: email sent successfully")
+    except Exception as e:
+        logger.error(f"notify_failure: failed to send email: {e}")
+
+
 default_args = {
     "owner": "amon",
     "retries": 0,
+    "on_failure_callback": notify_failure,
 }
 
 with DAG(
