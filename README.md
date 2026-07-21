@@ -21,6 +21,7 @@ Terraform,
 Docker
 
 ![imagealt](https://github.com/Amon-Mugo/Credit-Risk-Batch-Pipeline/blob/38d6ae07dffb9d28d0355c3c5588c3200b38699d/dashboard-1.png)
+![imagealt](https://github.com/Amon-Mugo/Credit-Risk-Batch-Pipeline/blob/c0a9275016c43c7130130691681fa46416236c6f/dashboard-2.png)
 
 ## Architecture
 
