@@ -11,7 +11,14 @@ This project simulates a real-world credit risk analytics pipeline for a lending
 
 The pipeline processes the full Lending Club historical dataset (~2.26M loan records, 151 columns) through cleaning, feature engineering, and aggregation stages, then loads the results into BigQuery for visualization in Looker Studio. The entire pipeline is orchestrated via Airflow running in Docker, with infrastructure provisioned through Terraform.
 
-**Tech stack:** GCS, PySpark, Dataproc Serverless, BigQuery, Looker Studio, Airflow, Terraform, Docker
+**Tech stack:**
+GCS, 
+PySpark,
+Dataproc Serverless,
+BigQuery, Looker Studio, 
+Airflow,
+Terraform,
+Docker
 
 ![imagealt](https://github.com/Amon-Mugo/Credit-Risk-Batch-Pipeline/blob/38d6ae07dffb9d28d0355c3c5588c3200b38699d/dashboard-1.png)
 
